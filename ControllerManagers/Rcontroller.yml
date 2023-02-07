@@ -1,0 +1,40 @@
+# ReplicationController
+kind: ReplicationController 
+apiVersion: v1 
+metadata:
+  name: pythonapp
+  labels:
+    app: python 
+spec: 
+  selector:
+    app: webapp
+  replicas: 2
+  template:
+    metadata:
+      name: pythonweb-app
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: pythonapp
+        image: mylnadmarktech/python-flask-app
+        ports:
+        - containerPort: 5000
+---
+# Sercives 
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: appsvc
+spec:
+  selector:
+    app: webapp
+  type: NodePort
+  ports:
+  - targetPort: 5000
+    nodePort: 32000
+    port: 80
+
+
+      
+      
