@@ -1,0 +1,22 @@
+#Author: Ibrehima Keita Devops Engineer US- Silver Spring 
+apiVersion: apps/v1
+kind: DaemonSet 
+metadata:
+  metadata: logmgt
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      name: hello
+      labels:
+        app: hello
+    spec:
+      containers:
+        - name: javawebappcontainer
+          image: mylnadmarktech/hello
+          ports:
+          - containerPort: 8080
+---
